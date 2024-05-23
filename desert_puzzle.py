@@ -32,6 +32,7 @@ def make_current_guess(visual, robot, sensor_readings, xs, ys):
             wall_check = robot.walls[y_coord][x_coord]
             if wall_check:
                 print("You found a worm!")
+                return xs, ys
             else:
                 visual.Show((y_coord, x_coord), sensor_vals = sensor_readings)
             return x_coord, y_coord
