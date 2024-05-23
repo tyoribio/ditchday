@@ -63,6 +63,7 @@ def rotate_sensor(visual, robot, sensor_readings, xs, ys):
 
 def guess_starting_loc(visual, correct_x, correct_y, attempts):
     game_over = False
+    game_won = False
     delta = 0
     while True:
         start_location_guess = input("Guess starting location? (y/n) ")
@@ -71,15 +72,16 @@ def guess_starting_loc(visual, correct_x, correct_y, attempts):
             if x_start == correct_x and y_start == correct_y:
                 print("Victory!")
                 game_over = True
+                game_won = True
             else:
                 print(f"Incorrect. Attempts remaining: {3 - (attempts + 1)}")
                 if attempts + 1 == MAX_GUESSES:
                     game_over = True
                     print("Ornithopter crashed. Too many incorrect guesses. Dunes shifting.")
                 delta += 1
-            return game_over, delta
+            return game_over, delta, game_won
         elif start_location_guess == 'n':
-            return game_over, delta
+            return game_over, delta, game_won
         else:
             print("Invalid option.")
 
@@ -165,8 +167,11 @@ def main():
                 rotate_sensor(visual, robot, sensor_readings, xs, ys)
 
                 # Guess start location if prompted
-                game_over, delta = guess_starting_loc(visual, correct_x, correct_y, attempts)
+                game_over, delta, game_won = guess_starting_loc(visual, correct_x, correct_y, attempts)
                 attempts += delta
+
+                if game_won:
+                    victory = True
 
                 break
 
