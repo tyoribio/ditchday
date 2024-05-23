@@ -114,7 +114,6 @@ def main():
     solution = utilities.generate_soln()
     robot = utilities.Robot(walls, row = solution[0], col = solution[1])
     correct_x, correct_y = robot.Position()
-    print(correct_x, correct_y)
 
     # Reinitialize wall map to account for player's acutal position
     removed_w = remove_close_walls(w, correct_x, correct_y)
