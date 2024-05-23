@@ -135,18 +135,18 @@ def main():
 
         # Check if player got caught by sand worm
         if robot.crashed:
-            print("Game over. Dunes shifting.")
+            print("Eaten by a worm! Game over. Dunes shifting.")
             return
         
         #Sense and show
         sensor_readings = robot.Sense()
         
         # Check if guessed position is on the map
-        if ys + drow < 0 or ys + drow > visual.rows:
+        if ys + drow < 1 or ys + drow > ROWS - 2:
             print("Sensors malfunctioned. Ornithopter crashed. Dunes shifting.")
             return
         
-        if xs + dcol < 0 or xs + dcol > visual.cols:
+        if xs + dcol < 1 or xs + dcol > COLS - 2:
             print("Sensors malfunctioned. Ornithopter crashed. Dunes shifting.")
             return
         
